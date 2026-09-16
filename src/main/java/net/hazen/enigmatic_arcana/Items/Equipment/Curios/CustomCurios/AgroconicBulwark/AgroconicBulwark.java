@@ -4,32 +4,33 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.sammy.malum.registry.common.MalumAttributes;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
-import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
-import net.hazen.enigmatic_arcana.Items.Important.EADispatcher;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import top.theillusivec4.curios.api.SlotContext;
 
-public class AgroconicBulwark extends CurioBaseItem {
-    public final EADispatcher dispatcher;
+import java.util.function.Consumer;
+
+public class AgroconicBulwark extends CurioBaseItem implements GeoItem {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public AgroconicBulwark() {
-        super(ItemPropertiesHelper
-                .equipment()
+        super(new Item.Properties()
                 .stacksTo(1)
                 .fireResistant()
                 .rarity(EARarities.AGROCONIC_RARITY.getValue())
         );
-
-        this.dispatcher = new EADispatcher();
     }
 
     @Override
@@ -43,15 +44,45 @@ public class AgroconicBulwark extends CurioBaseItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (!level.isClientSide && entity instanceof Player player )
-        {
-            dispatcher.idle(player, stack);
-        }
-    }
-
-    @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
         return true;
     }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(animationController);
+    }
+
+    private static final RawAnimation IDLE_ANIMATION = RawAnimation.begin().thenLoop("idle");
+
+    private final AnimationController<AgroconicBulwark> animationController = new AnimationController<>(this, "controller", 0, this::predicate);
+
+    // Make your animations in this predicate
+    private PlayState predicate(AnimationState<AgroconicBulwark> event)
+    {
+        event.getController().setAnimation(IDLE_ANIMATION);
+
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private AgroconicBulwarkRenderer renderer;
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+                if (this.renderer == null)
+                    this.renderer = new AgroconicBulwarkRenderer();
+
+                return this.renderer;
+            }
+        });
+    }
+
 }

@@ -1,4 +1,4 @@
-package net.hazen.enigmatic_arcana.Items.Important;
+package net.hazen.enigmatic_arcana.Items.Utils;
 
 import com.sammy.malum.registry.common.item.MalumItems;
 import net.hazen.enigmatic_arcana.EnigmaticArcana;

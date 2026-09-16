@@ -1,4 +1,4 @@
-package net.hazen.enigmatic_arcana.Items.Important;
+package net.hazen.enigmatic_arcana.Items.Utils;
 
 import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
 import io.redspace.ironsspellbooks.api.spells.ISpellContainer;

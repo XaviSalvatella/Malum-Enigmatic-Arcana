@@ -1,8 +1,7 @@
-package net.hazen.enigmatic_arcana.Items.Important;
+package net.hazen.enigmatic_arcana.Items.Utils;
 
-import com.sammy.malum.registry.common.MalumAttributes;
 import com.sammy.malum.registry.common.item.MalumItems;
-import dev.shadowsoffire.apothic_attributes.api.ALObjects;
+import io.redspace.ironslib.registry.IronsLibRegistries;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.item.weapons.IronsWeaponTier;
@@ -29,7 +28,7 @@ public class EAExtendedWeaponsTiers implements Tier, IronsWeaponTier {
             10,
             BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
             () -> Ingredient.of(MalumItems.SOUL_STAINED_STEEL_PLATING.get()),
-            new AttributeContainer(ALObjects.Attributes.CRIT_CHANCE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+            new AttributeContainer(IronsLibRegistries.AttributeRegistry.CRIT_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
             new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
             new AttributeContainer(AttributeRegistry.SPELL_RESIST, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
             new AttributeContainer(Attributes.ENTITY_INTERACTION_RANGE, 2, AttributeModifier.Operation.ADD_VALUE)

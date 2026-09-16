@@ -1,7 +1,9 @@
 package net.hazen.enigmatic_arcana.Items.Equipment.Weapons.Catastrophe;
 
+import net.hazen.enigmatic_arcana.Utils.EARarities;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.component.Unbreakable;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.EventHooks;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -37,7 +40,13 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 
 public class Catastrophe extends BowItem implements GeoItem {
     public Catastrophe(Properties properties) {
-        super(properties);
+        super(properties
+                .stacksTo(1)
+                .fireResistant()
+                .rarity(EARarities.SOUL_STAINED_RARITY.getValue())
+                .durability(1561)
+                .component(DataComponents.UNBREAKABLE, new Unbreakable(false))
+        );
         GeoItem.registerSyncedAnimatable(this);
     }
 

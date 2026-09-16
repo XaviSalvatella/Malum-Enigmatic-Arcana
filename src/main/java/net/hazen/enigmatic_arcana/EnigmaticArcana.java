@@ -1,18 +1,12 @@
 package net.hazen.enigmatic_arcana;
 
-import io.redspace.ironsspellbooks.item.SpellBook;
-import io.redspace.ironsspellbooks.render.SpellBookCurioRenderer;
-import mod.azure.azurelib.common.animation.cache.AzIdentityRegistry;
-import mod.azure.azurelib.common.render.armor.AzArmorRendererRegistry;
-import net.hazen.enigmatic_arcana.Items.Equipment.Armor.AgroconicSets.ApothicCrusader.ApothicCrusaderArmorRenderer;
-import net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.AgroconicBulwark.AgroconicBulwarkItemRenderer;
-import net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.AgroconicBulwark.AgroconicBulwarkRenderer;
-import net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.AgroconicWings.AgroconicWingsItemRenderer;
-import net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.AgroconicWings.AgroconicWingsRenderer;
-import net.hazen.enigmatic_arcana.Items.Equipment.Curios.Spellbooks.Antonomos.AntonomosItemRenderer;
-import net.hazen.enigmatic_arcana.Items.Equipment.Curios.Spellbooks.Antonomos.AntonomosRenderer;
-import net.hazen.enigmatic_arcana.Items.Important.EAArmorMaterials;
+import net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.AgroconicBulwark.AgroconicBulwark;
+import net.hazen.enigmatic_arcana.Items.Equipment.Curios.Spellbooks.Antonomos.Antonomos;
+import net.hazen.enigmatic_arcana.Items.Utils.EAArmorMaterials;
 import net.hazen.enigmatic_arcana.Registries.*;
+import net.hazen.hazentouvelib.Items.Curios.GenericCurioRenderer;
+import net.hazen.hazentouvelib.Items.Curios.Wings.WingCurioItem;
+import net.hazen.hazentouvelib.Items.Curios.Wings.WingCurioRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -50,7 +44,9 @@ public class EnigmaticArcana {
         modContainer.registerConfig(ModConfig.Type.COMMON, EAConfig.SPEC);
     }
 
-    private void commonSetup(FMLCommonSetupEvent event) {
+    private void commonSetup(final FMLCommonSetupEvent event)
+    {
+
     }
 
     @SubscribeEvent
@@ -70,69 +66,13 @@ public class EnigmaticArcana {
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             event.enqueueWork(() -> {
-                AzArmorRendererRegistry.register(AntonomosItemRenderer::new, EAItemRegistry.ANTONOMOS.get());
-                CuriosRendererRegistry.register(EAItemRegistry.ANTONOMOS.get(), AntonomosRenderer::new);
+                EAItemRegistry.getEAItems().stream().filter(item -> item.get() instanceof WingCurioItem).forEach((item) -> CuriosRendererRegistry.register(item.get(), WingCurioRenderer::new));
+                EAItemRegistry.getEAItems().stream().filter(item -> item.get() instanceof Antonomos).forEach((item) -> CuriosRendererRegistry.register(item.get(), GenericCurioRenderer::new));
+                EAItemRegistry.getEAItems().stream().filter(item -> item.get() instanceof AgroconicBulwark).forEach((item) -> CuriosRendererRegistry.register(item.get(), GenericCurioRenderer::new));
 
-                EAItemRegistry.getEAItems().stream()
-                        .map(java.util.function.Supplier::get)
-                        .filter(item -> item instanceof SpellBook && item != EAItemRegistry.ANTONOMOS.get())
-                        .forEach(item -> CuriosRendererRegistry.register(item, SpellBookCurioRenderer::new));
 
-                /*
-                EAItemRegistry.getEAItems().stream()
-                        .map(java.util.function.Supplier::get)
-                        .filter(item -> item instanceof SheathCurioItem)
-                        .forEach(item -> CuriosRendererRegistry.register(item, SheathCurioRenderer::new));
-                 */
             });
 
-            /*
-             *** Armor Rendering Registry
-             */
-
-            //Apothic Crusader
-            AzArmorRendererRegistry.register(ApothicCrusaderArmorRenderer::new,
-                    EAItemRegistry.APOTHIC_CRUSADER_HELMET.get(),
-                    EAItemRegistry.APOTHIC_CRUSADER_CHESTPLATE.get(),
-                    EAItemRegistry.APOTHIC_CRUSADER_LEGGINGS.get(),
-                    EAItemRegistry.APOTHIC_CRUSADER_BOOTS.get()
-            );
-
-            /*
-            *** Curio Renderer
-             */
-
-            // Agroconic Bulwark
-            AzArmorRendererRegistry.register(AgroconicBulwarkItemRenderer::new, EAItemRegistry.AGROCONIC_BULWARK.get());
-            CuriosRendererRegistry.register(
-                    EAItemRegistry.AGROCONIC_BULWARK.get(), AgroconicBulwarkRenderer::new
-            );
-            // Agroconic Wings
-            AzArmorRendererRegistry.register(AgroconicWingsItemRenderer::new, EAItemRegistry.AGROCONIC_WINGS.get());
-            CuriosRendererRegistry.register(
-                    EAItemRegistry.AGROCONIC_WINGS.get(), AgroconicWingsRenderer::new
-            );
-
-            /*
-             *** Spellbooks
-             */
-
-            /*
-             *** Animation Registry
-             */
-
-            AzIdentityRegistry.register(
-
-                    EAItemRegistry.APOTHIC_CRUSADER_HELMET.get(),
-                    EAItemRegistry.APOTHIC_CRUSADER_CHESTPLATE.get(),
-                    EAItemRegistry.APOTHIC_CRUSADER_LEGGINGS.get(),
-                    EAItemRegistry.APOTHIC_CRUSADER_BOOTS.get(),
-
-                    EAItemRegistry.AGROCONIC_WINGS.get(),
-                    EAItemRegistry.ANTONOMOS.get(),
-                    EAItemRegistry.AGROCONIC_BULWARK.get()
-
-            );
         }
     }
 }

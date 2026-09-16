@@ -1,30 +1,26 @@
 package net.hazen.enigmatic_arcana.Items.Equipment.Armor.AgroconicSets.ApothicCrusader;
 
-import mod.azure.azurelib.common.render.armor.AzArmorRenderer;
-import mod.azure.azurelib.common.render.armor.AzArmorRendererConfig;
-import mod.azure.azurelib.common.render.layer.AzAutoGlowingLayer;
-import net.hazen.enigmatic_arcana.EnigmaticArcana;
-import net.hazen.enigmatic_arcana.Items.Important.EAAzArmorLeggingTorsoLayerPipeline;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
-public class ApothicCrusaderArmorRenderer extends AzArmorRenderer {
-    private static final ResourceLocation GEO = ResourceLocation.fromNamespaceAndPath(
-            EnigmaticArcana.MOD_ID,
-            "geo/armor/apothic_crusader_armor.geo.json"
-    );
-
-    private static final ResourceLocation TEX = ResourceLocation.fromNamespaceAndPath(
-            EnigmaticArcana.MOD_ID,
-            "textures/armor/apothic_crusader_armor.png"
-    );
-
-    public ApothicCrusaderArmorRenderer() {
-        super(
-                AzArmorRendererConfig.builder(GEO, TEX)
-                        .setAnimatorProvider(ApothicCrusaderAnimator::new)
-                        .addRenderLayer(new AzAutoGlowingLayer<>())
-                        .setPipelineContext(EAAzArmorLeggingTorsoLayerPipeline::new)
-                        .build()
-        );
+public class ApothicCrusaderArmorRenderer extends GeoArmorRenderer<ApothicCrusaderArmorItem> {
+    public ApothicCrusaderArmorRenderer(ApothicCrusaderArmorModel apothicCrusaderArmorModel) {
+        super(new ApothicCrusaderArmorModel());
+        this.addRenderLayer(new ApothicCrusaderArmorLayer(this));
+        this.head = new GeoBone((GeoBone)null, "armorHead", false, (double)0.0F, false, false);
+        this.body = new GeoBone((GeoBone)null, "armorBody", false, (double)0.0F, false, false);
+        this.rightArm = new GeoBone((GeoBone)null, "armorRightArm", false, (double)0.0F, false, false);
+        this.leftArm = new GeoBone((GeoBone)null, "armorLeftArm", false, (double)0.0F, false, false);
+        this.rightLeg = new GeoBone((GeoBone)null, "armorRightLeg", false, (double)0.0F, false, false);
+        this.leftLeg = new GeoBone((GeoBone)null, "armorLeftLeg", false, (double)0.0F, false, false);
+        this.rightBoot = new GeoBone((GeoBone)null, "armorRightBoot", false, (double)0.0F, false, false);
+        this.leftBoot = new GeoBone((GeoBone)null, "armorLeftBoot", false, (double)0.0F, false, false);
     }
-}
+
+    public RenderType getRenderType(ApothicCrusaderArmorItem animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
+        return RenderType.entityTranslucent(this.getTextureLocation(animatable));
+    }
+    }

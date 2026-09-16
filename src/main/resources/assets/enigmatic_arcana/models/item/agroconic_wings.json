@@ -1,19 +1,15 @@
 {
-  "loader": "neoforge:item_layers",
-  "parent": "minecraft:item/generated",
-  "render_type": "cutout",
-  "textures": {
-    "layer0": "enigmatic_arcana:item/curios/agroconic_wings",
-    "layer1": "enigmatic_arcana:item/curios/agroconic_wings_emissive"
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "enigmatic_arcana:item/agroconic_wings_gui"
   },
-  "neoforge_data": {
-    "layers": {
-      "1": {
-        "color": "FFFFFFFF",
-        "block_light": 15,
-        "sky_light": 15,
-        "ambient_occlusion": false
-      }
+  "perspectives": {
+    "gui": {
+      "parent": "enigmatic_arcana:item/agroconic_wings_gui"
+    },
+    "fixed": {
+      "parent": "enigmatic_arcana:item/agroconic_wings_fixed"
     }
   }
 }

@@ -1,37 +1,43 @@
-package net.hazen.enigmatic_arcana.Items.Important;
+package net.hazen.enigmatic_arcana.Items.Utils;
 
 import com.google.common.base.Suppliers;
 import com.sammy.malum.registry.common.MalumAttributes;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
-import net.hazen.enigmatic_arcana.Datagen.EATags;
+import net.hazen.hazentouvelib.Items.Armor.HLArmorItem;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class EAArmorItem extends ArmorItem {
+public class EAArmorItem extends HLArmorItem implements GeoItem {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private final Supplier<ItemAttributeModifiers> defaultModifiers;
-    public final EADispatcher dispatcher;
 
     public EAArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties, AttributeContainer... attributeContainers) {
         super(material, type, properties);
-        this.dispatcher = new EADispatcher();
         this.defaultModifiers = Suppliers.memoize(() ->
         {
-            // Looking at how ISS does this because it is 1 AM and I am tired
             int i = material.value().getDefense(type);
             float f = material.value().toughness();
             ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
@@ -82,9 +88,17 @@ public class EAArmorItem extends ArmorItem {
         };
     }
 
+    @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+        return this.defaultModifiers.get();
+    }
+
+    public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
+        return List.of(); // or Collections.emptyList();
+    }
 
     @Override
-    public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
         ItemAttributeModifiers modifiers = super.getDefaultAttributeModifiers(stack);
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
 
@@ -101,23 +115,42 @@ public class EAArmorItem extends ArmorItem {
         return builder.build();
     }
 
+    // Geckolib
     @Override
-    public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers() {
-        return this.defaultModifiers.get();
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<EAArmorItem>(this, "controler", this::predicate));
     }
 
-    public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
-        return List.of(); // or Collections.emptyList();
+    private PlayState predicate(AnimationState<EAArmorItem> itemAnimationState)
+    {
+        itemAnimationState.getController().setAnimation(RawAnimation.begin().thenLoop("idle"));
+        return PlayState.CONTINUE;
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (!level.isClientSide && entity instanceof Player player ) {
-            player.getArmorSlots().forEach(wornArmor -> {
-                if (wornArmor != null && wornArmor.is(EATags.IDLE_ARMOR)) {
-                    dispatcher.idle(player, wornArmor);
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+
+
+    @Override
+    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
+        consumer.accept(new GeoRenderProvider() {
+            private GeoArmorRenderer<?> renderer;
+
+            @Override
+            public <T extends LivingEntity> HumanoidModel<?> getGeoArmorRenderer(@Nullable T livingEntity, ItemStack itemStack, @Nullable EquipmentSlot equipmentSlot, @Nullable HumanoidModel<T> original) {
+                if (this.renderer == null) {
+                    this.renderer = supplyRenderer();
                 }
-            });
-        }
+                return this.renderer;
+            }
+        });
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public GeoArmorRenderer<?> supplyRenderer() {
+        return null;
     }
 }

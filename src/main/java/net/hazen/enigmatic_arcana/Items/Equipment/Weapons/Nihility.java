@@ -6,7 +6,7 @@ import io.redspace.ironsspellbooks.api.item.weapons.ExtendedSwordItem;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.ironsspellbooks.util.TooltipsUtils;
-import net.hazen.enigmatic_arcana.Items.Important.EAExtendedWeaponsTiers;
+import net.hazen.enigmatic_arcana.Items.Utils.EAExtendedWeaponsTiers;
 import net.hazen.enigmatic_arcana.Utils.ArcaneScytheItem;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
 import net.minecraft.network.chat.Component;
