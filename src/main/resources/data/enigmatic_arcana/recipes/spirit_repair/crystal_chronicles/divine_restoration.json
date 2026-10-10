@@ -1,0 +1,34 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 1,
+    "item": "crystal_chronicles:divinite_shard"
+  },
+  "spirits": [
+    {
+      "type": "sacred",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "crystal_chronicles:paladin_sword",
+    "crystal_chronicles:paladin_shield",
+    "crystal_chronicles:paladin_helmet",
+    "crystal_chronicles:paladin_chestplate",
+    "crystal_chronicles:paladin_leggings",
+    "crystal_chronicles:paladin_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "crystal_chronicles"
+    }
+  ]
+}

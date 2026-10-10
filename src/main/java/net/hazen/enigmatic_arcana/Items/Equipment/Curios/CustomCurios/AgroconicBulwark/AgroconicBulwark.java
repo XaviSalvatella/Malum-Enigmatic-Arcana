@@ -2,7 +2,7 @@ package net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.Agroconic
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.sammy.malum.registry.common.MalumAttributes;
+import com.sammy.malum.registry.common.AttributeRegistry;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -14,9 +14,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.GeoRenderProvider;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -34,12 +35,12 @@ public class AgroconicBulwark extends CurioBaseItem implements GeoItem {
     }
 
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> attr = LinkedHashMultimap.create();
-        attr.put(Attributes.ARMOR, new AttributeModifier(id, 4f, AttributeModifier.Operation.ADD_VALUE));
-        attr.put(MalumAttributes.SOUL_WARD_CAPACITY, new AttributeModifier(id, 8f, AttributeModifier.Operation.ADD_VALUE));
-        attr.put(MalumAttributes.SOUL_WARD_RECOVERY_RATE, new AttributeModifier(id, 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-        attr.put(MalumAttributes.SOUL_WARD_INTEGRITY, new AttributeModifier(id, 0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, java.util.UUID id, ItemStack stack) {
+        Multimap<Attribute, AttributeModifier> attr = LinkedHashMultimap.create();
+        attr.put(Attributes.ARMOR, new AttributeModifier(id, "Agroconic bulwark", 4f, AttributeModifier.Operation.ADDITION));
+        attr.put(AttributeRegistry.SOUL_WARD_CAP.get(), new AttributeModifier(id, "Agroconic bulwark", 8f, AttributeModifier.Operation.ADDITION));
+        attr.put(AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get(), new AttributeModifier(id, "Agroconic bulwark", 0.5f, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        attr.put(AttributeRegistry.SOUL_WARD_INTEGRITY.get(), new AttributeModifier(id, "Agroconic bulwark", 0.3f, AttributeModifier.Operation.MULTIPLY_TOTAL));
         return attr;
     }
 
@@ -71,12 +72,12 @@ public class AgroconicBulwark extends CurioBaseItem implements GeoItem {
     }
 
     @Override
-    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
-        consumer.accept(new GeoRenderProvider() {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
             private AgroconicBulwarkRenderer renderer;
 
             @Override
-            public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (this.renderer == null)
                     this.renderer = new AgroconicBulwarkRenderer();
 

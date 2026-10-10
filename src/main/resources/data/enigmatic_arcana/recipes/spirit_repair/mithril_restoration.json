@@ -1,0 +1,25 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.75,
+  "repairMaterial": {
+    "count": 1,
+    "item": "irons_spellbooks:mithril_ingot"
+  },
+  "spirits": [
+    {
+      "type": "sacred",
+      "count": 16
+    },
+    {
+      "type": "arcane",
+      "count": 16
+    }
+  ],
+  "inputs": [
+    "irons_spellbooks:twilight_gale",
+    "irons_spellbooks:boreal_blade",
+    "irons_spellbooks:spellbreaker"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": ""
+}

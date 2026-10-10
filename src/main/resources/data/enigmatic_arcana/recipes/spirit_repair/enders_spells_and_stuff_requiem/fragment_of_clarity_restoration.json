@@ -1,0 +1,35 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 1,
+    "item": "ess_requiem:fragment_of_clarity"
+  },
+  "spirits": [
+    {
+      "type": "eldritch",
+      "count": 16
+    },
+    {
+      "type": "wicked",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "ess_requiem:inevitability",
+    "ess_requiem:arm_of_decay",
+    "ess_requiem:intertwined_peak"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ess_requiem"
+    }
+  ]
+}

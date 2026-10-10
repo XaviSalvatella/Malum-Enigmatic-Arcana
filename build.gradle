@@ -20,6 +20,7 @@ minecraft {
 }
 repositories {
     maven { url = 'https://cursemaven.com' }
+    maven { url = 'https://code.redspace.io/releases' }
     maven { url = 'https://maven.theillusivec4.top' }
     maven { url = 'https://maven.kosmx.dev' }
     maven { url = 'https://maven.blamejared.com' }
@@ -28,14 +29,17 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation fg.deobf('curse.maven:malum-484064:6646111')
-    implementation fg.deobf('curse.maven:irons-spells-n-spellbooks-855414:6054196')
+    implementation fg.deobf('io.redspace:irons_spellbooks:1.20.1-3.16.3')
     implementation fg.deobf('team.lodestar.lodestone:lodestone:1.20.1-1.6.4.1.256')
-    implementation fg.deobf('top.theillusivec4.curios:curios-forge:5.11.0+1.20.1')
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.7.1.1')
+    implementation fg.deobf('top.theillusivec4.curios:curios-forge:5.14.1+1.20.1')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.8.2')
     implementation fg.deobf('dev.kosmx.player-anim:player-animation-lib-forge:1.0.2-rc1+1.20')
     implementation fg.deobf('top.theillusivec4.caelus:caelus-forge:3.1.0+1.20')
-    // HazentouveLib calls still require a 1.20.1 replacement; see PORT_STATUS.md.
+    implementation fg.deobf('io.redspace:irons_lib:1.20.1-2.1.0')
 }
 sourceSets.main.resources.srcDir 'src/generated/resources'
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 jar.finalizedBy('reobfJar')
+
+// The converted, checked-in recipes replace the upstream NeoForge generators.
+sourceSets.main.java.exclude('**/Datagen/**')

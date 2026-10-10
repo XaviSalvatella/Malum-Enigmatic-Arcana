@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 1,
+    "item": "firesenderexpansion:infused_obsidian_fragments"
+  },
+  "spirits": [
+    {
+      "type": "eldritch",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "firesenderexpansion:end_lord_helmet",
+    "firesenderexpansion:end_lord_chestplate",
+    "firesenderexpansion:end_lord_leggings",
+    "firesenderexpansion:end_lord_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "firesenderexpansion"
+    }
+  ]
+}

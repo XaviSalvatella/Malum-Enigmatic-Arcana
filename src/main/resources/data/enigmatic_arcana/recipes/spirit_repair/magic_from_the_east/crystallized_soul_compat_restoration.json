@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 8,
+    "item": "iss_magicfromtheeast:crystallized_soul"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 12
+    },
+    {
+      "type": "eldritch",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "iss_magicfromtheeast:soul_katana",
+    "iss_magicfromtheeast:soul_breaker",
+    "iss_magicfromtheeast:soulpiercer"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "iss_magicfromtheeast"
+    }
+  ]
+}

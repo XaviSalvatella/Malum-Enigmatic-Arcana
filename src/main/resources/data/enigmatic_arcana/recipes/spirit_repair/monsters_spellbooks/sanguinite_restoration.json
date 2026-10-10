@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "monsterspellbooks:sanguinite_ingot"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:sanguinite_hero_hood",
+    "monsterspellbooks:sanguinite_hero_chestplate",
+    "monsterspellbooks:sanguinite_hero_leggings",
+    "monsterspellbooks:sanguinite_hero_boots",
+    "monsterspellbooks:sanguinite_axe",
+    "monsterspellbooks:sanguinite_scythe",
+    "monsterspellbooks:sanguinite_dagger"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

@@ -6,22 +6,22 @@ import software.bernie.geckolib.model.DefaultedItemGeoModel;
 
 public class AntonomosModel extends DefaultedItemGeoModel<Antonomos> {
     public AntonomosModel() {
-        super(ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, ""));
+        super(new ResourceLocation(EnigmaticArcana.MOD_ID, ""));
     }
 
     // Just replace where the path is with the file path of your texture, EZ PZ
     @Override
     public ResourceLocation getModelResource(Antonomos animatable) {
-        return ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "geo/curios/antonomos.geo.json");
+        return new ResourceLocation(EnigmaticArcana.MOD_ID, "geo/curios/antonomos.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(Antonomos animatable) {
-        return ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "textures/curios/antonomos_static.png");
+        return new ResourceLocation(EnigmaticArcana.MOD_ID, "textures/curios/antonomos_static.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(Antonomos animatable) {
-        return ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "animations/curios/antonomos.animation.json");
+        return new ResourceLocation(EnigmaticArcana.MOD_ID, "animations/curios/antonomos.animation.json");
     }
 }

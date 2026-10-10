@@ -17,7 +17,7 @@ public class EACreativeModeTabs {
 
     public static final Supplier<CreativeModeTab> EA_EQUIPMENT = CREATIVE_MODE_TAB.register("ea_equipment",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(EAItemRegistry.AGROCONIC_ALLOY.get()))
-                    //.withTabsBefore(ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "ea_materials"))
+                    //.withTabsBefore(new ResourceLocation(EnigmaticArcana.MOD_ID, "ea_materials"))
                     .title(Component.translatable("creativetab.enigmatic_arcana.ea_equipment"))
                     .displayItems((itemDisplayParameters, output) -> {
 

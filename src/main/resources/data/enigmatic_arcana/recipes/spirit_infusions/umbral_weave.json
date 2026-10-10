@@ -1,0 +1,44 @@
+{
+  "type": "malum:spirit_infusion",
+  "input": {
+    "count": 1,
+    "item": "irons_spellbooks:mithril_weave"
+  },
+  "spirits": [
+    {
+      "type": "eldritch",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 24
+    },
+    {
+      "type": "wicked",
+      "count": 24
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "enigmatic_arcana:umbral_weave"
+  },
+  "extra_items": [
+    {
+      "count": 4,
+      "item": "malum:spirit_fabric"
+    },
+    {
+      "count": 4,
+      "item": "malum:hallowed_gold_ingot"
+    },
+    {
+      "count": 2,
+      "item": "irons_spellbooks:magic_cloth"
+    },
+    {
+      "count": 2,
+      "item": "malum:astral_weave"
+    }
+  ],
+  "useNbtFromInput": true
+}

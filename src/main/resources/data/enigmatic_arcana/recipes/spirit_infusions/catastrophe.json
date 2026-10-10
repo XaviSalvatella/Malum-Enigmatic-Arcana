@@ -1,0 +1,40 @@
+{
+  "type": "malum:spirit_infusion",
+  "input": {
+    "count": 1,
+    "item": "minecraft:bow"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 16
+    },
+    {
+      "type": "wicked",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "enigmatic_arcana:catastrophe"
+  },
+  "extra_items": [
+    {
+      "count": 4,
+      "item": "malum:soul_stained_steel_ingot"
+    },
+    {
+      "count": 2,
+      "item": "malum:hex_ash"
+    },
+    {
+      "count": 4,
+      "item": "malum:refined_soulstone"
+    }
+  ],
+  "useNbtFromInput": true
+}

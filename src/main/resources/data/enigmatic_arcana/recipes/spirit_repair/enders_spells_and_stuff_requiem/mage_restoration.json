@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 3,
+    "item": "irons_spellbooks:magic_cloth"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "ess_requiem:blademaster_helmet",
+    "ess_requiem:blademaster_chestplate",
+    "ess_requiem:blademaster_leggings",
+    "ess_requiem:blademaster_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ess_requiem"
+    }
+  ]
+}

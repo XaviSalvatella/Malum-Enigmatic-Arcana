@@ -3,7 +3,7 @@ package net.hazen.enigmatic_arcana.Items.Equipment.Weapons.Catastrophe;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
+
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,16 +18,16 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.item.component.Unbreakable;
+
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.event.EventHooks;
+import net.minecraftforge.event.ForgeEventFactory;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.GeoRenderProvider;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.AnimatableManager;
-import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.PlayState;
-import software.bernie.geckolib.animation.RawAnimation;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
@@ -45,7 +45,7 @@ public class Catastrophe extends BowItem implements GeoItem {
                 .fireResistant()
                 .rarity(EARarities.SOUL_STAINED_RARITY.getValue())
                 .durability(1561)
-                .component(DataComponents.UNBREAKABLE, new Unbreakable(false))
+                
         );
         GeoItem.registerSyncedAnimatable(this);
     }
@@ -64,106 +64,43 @@ public class Catastrophe extends BowItem implements GeoItem {
         return cache;
     }
 
-    @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-        if (!(entityLiving instanceof Player player)) return;
 
-        ItemStack ammoStack = player.getProjectile(stack);
-        if (ammoStack.isEmpty()) return;
-
-        int charge = this.getUseDuration(stack, entityLiving) - timeLeft;
-        charge = EventHooks.onArrowLoose(stack, level, player, charge, true);
-        if (charge < 0) return;
-
+    @Override public boolean isDamageable(ItemStack stack) { return false; }
+    @Override public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+        if (!(entity instanceof Player player)) return;
+        ItemStack ammo = player.getProjectile(stack);
+        boolean creative = player.getAbilities().instabuild;
+        boolean infinity = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.INFINITY_ARROWS, stack) > 0;
+        int charge = ForgeEventFactory.onArrowLoose(stack, level, player, getUseDuration(stack) - timeLeft, !ammo.isEmpty() || creative || infinity);
+        if (charge < 0 || (ammo.isEmpty() && !creative && !infinity)) return;
+        if (ammo.isEmpty()) ammo = new ItemStack(Items.ARROW);
         float power = getPowerForTime(charge);
         if (power < 0.1F) return;
-
-        List<ItemStack> ammoList = draw(stack, ammoStack, player);
-        if (ammoList.isEmpty()) return;
-
-        boolean infiniteAmmo =
-                player.getAbilities().instabuild
-                        || (ammoStack.getItem() instanceof ArrowItem arrow
-                        && arrow.isInfinite(ammoStack, stack, player));
-
+        ArrowItem arrowItem = ammo.getItem() instanceof ArrowItem item ? item : (ArrowItem) Items.ARROW;
+        boolean infinite = creative || arrowItem.isInfinite(ammo, stack, player);
         if (level instanceof ServerLevel serverLevel) {
-
-            if (isAllNormalArrows(ammoList)) {shootThreeArc(serverLevel,player, stack, ammoList, power * 3.0F, 1.0F, infiniteAmmo);
-            } else {
-                this.shoot(serverLevel, player, player.getUsedItemHand(), stack, ammoList, power * 3.0F, 1.0F, power == 1.0F, null
-                );
+            int count = ammo.is(Items.ARROW) ? 3 : 1;
+            float[] pitchOffsets = {0, -15, 15};
+            for (int i = 0; i < count; i++) {
+                AbstractArrow arrow = arrowItem.createArrow(level, ammo, player);
+                arrow.shootFromRotation(player, player.getXRot() + pitchOffsets[i], player.getYRot(), 0, power * 3, 1);
+                arrow.setCritArrow(power == 1);
+                int damage = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.POWER_ARROWS, stack);
+                if (damage > 0) arrow.setBaseDamage(arrow.getBaseDamage() + damage * 0.5 + 0.5);
+                int knockback = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.PUNCH_ARROWS, stack);
+                if (knockback > 0) arrow.setKnockback(knockback);
+                if (net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.FLAMING_ARROWS, stack) > 0) arrow.setSecondsOnFire(100);
+                arrow.pickup = infinite ? AbstractArrow.Pickup.CREATIVE_ONLY : i == 0 ? AbstractArrow.Pickup.ALLOWED : AbstractArrow.Pickup.DISALLOWED;
+                level.addFreshEntity(arrow);
             }
-
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + power * 0.5F);
-
+            if (!infinite) {
+                ammo.shrink(1);
+                if (ammo.isEmpty()) player.getInventory().removeItem(ammo);
+            }
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1, 1 / (level.random.nextFloat() * 0.4F + 1.2F) + power * 0.5F);
             player.awardStat(Stats.ITEM_USED.get(this));
+            triggerAnim(player, GeoItem.getOrAssignId(stack, serverLevel), CONTROLLER, "release");
         }
-
-        if (entityLiving instanceof ServerPlayer serverPlayer) {
-            int id = Math.toIntExact(GeoItem.getOrAssignId(stack, serverPlayer.serverLevel()));
-            triggerAnim(serverPlayer, id, CONTROLLER, "release");
-        }
-    }
-
-    @Override
-    protected void shootProjectile(LivingEntity shooter, Projectile projectile, int index, float velocity, float inaccuracy, float angle, @Nullable LivingEntity target) {
-        projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot() + angle, 0.0F, velocity, inaccuracy);
-    }
-
-    // Helper: checks whether the provided ammo stacks are vanilla arrows
-    private boolean isAllNormalArrows(List<ItemStack> ammoStacks) {
-        for (ItemStack s : ammoStacks) {
-            if (s == null || s.isEmpty()) return false;
-            if (s.getItem() != Items.ARROW) return false;
-        }
-        return true;
-    }
-
-    private void shootThreeArc(ServerLevel level, Player player, ItemStack bowStack, List<ItemStack> ammoStacks,
-                               float velocity, float inaccuracy, boolean infinite) {
-
-        if (ammoStacks.isEmpty()) return;
-
-        ItemStack ammo = ammoStacks.get(0);
-
-        float basePitch = player.getXRot();
-        float yaw = player.getYRot();
-        float[] pitchOffsets = {0.0f, -15.0f, 15.0f};
-
-        boolean hasAmmo = !ammo.isEmpty();
-
-        for (int i = 0; i < 3; i++) {
-            float pitch = basePitch + pitchOffsets[i];
-
-            ItemStack usedAmmo = hasAmmo ? ammo.copy() : new ItemStack(Items.ARROW);
-
-            ArrowItem arrowItem = (ArrowItem) usedAmmo.getItem();
-            AbstractArrow arrowEntity = arrowItem.createArrow(level, usedAmmo, player, bowStack);
-
-            arrowEntity.setPos(player.getX(), player.getEyeY() - 0.1D, player.getZ());
-            arrowEntity.shootFromRotation(player, pitch, yaw, 0.0F, velocity, inaccuracy);
-
-            arrowEntity.pickup = infinite
-                    ? AbstractArrow.Pickup.CREATIVE_ONLY
-                    : (i == 0 ? AbstractArrow.Pickup.ALLOWED : AbstractArrow.Pickup.DISALLOWED);
-
-            level.addFreshEntity(arrowEntity);
-        }
-
-        if (hasAmmo && !infinite) {
-            ammo.shrink(1);
-        }
-    }
-
-    private boolean removeOneAmmoFromPlayer(Player player, ItemStack prototype) {
-        for (int i = 0; i < player.getInventory().items.size(); i++) {
-            ItemStack itemStack = player.getInventory().items.get(i);
-            if (!itemStack.isEmpty() && ItemStack.isSameItemSameComponents(itemStack, prototype)) {
-                if (itemStack.isEmpty()) player.getInventory().items.set(i, ItemStack.EMPTY);
-                return true;
-            }
-        }
-        return false;
     }
 
     public static float getPowerForTime(int charge) {
@@ -177,7 +114,7 @@ public class Catastrophe extends BowItem implements GeoItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(ItemStack stack) {
         return 72000;
     }
 
@@ -189,11 +126,11 @@ public class Catastrophe extends BowItem implements GeoItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        boolean flag = !player.getProjectile(itemstack).isEmpty();
-        InteractionResultHolder<ItemStack> ret = EventHooks.onArrowNock(itemstack, level, player, hand, flag);
+        boolean flag = !player.getProjectile(itemstack).isEmpty() || net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(net.minecraft.world.item.enchantment.Enchantments.INFINITY_ARROWS, itemstack) > 0;
+        InteractionResultHolder<ItemStack> ret = ForgeEventFactory.onArrowNock(itemstack, level, player, hand, flag);
         if (ret != null) {
             return ret;
-        } else if (!player.hasInfiniteMaterials() && !flag) {
+        } else if (!player.getAbilities().instabuild && !flag) {
             return InteractionResultHolder.fail(itemstack);
         } else {
             player.startUsingItem(hand);
@@ -212,12 +149,12 @@ public class Catastrophe extends BowItem implements GeoItem {
     }
 
     @Override
-    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
-        consumer.accept(new GeoRenderProvider() {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
             private CatastropheRenderer renderer;
 
             @Override
-            public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (this.renderer == null)
                     this.renderer = new CatastropheRenderer();
 
@@ -231,7 +168,6 @@ public class Catastrophe extends BowItem implements GeoItem {
         controllers.add(new AnimationController<>(this, CONTROLLER, 0, state -> {
 
             var stack = state.getData(DataTickets.ITEMSTACK);
-            var perspective = state.getData(DataTickets.ITEM_RENDER_PERSPECTIVE);
 
             boolean play = false;
 

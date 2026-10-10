@@ -13,7 +13,7 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 
 public class ApothicCrusaderArmorLayer extends GeoRenderLayer<ApothicCrusaderArmorItem> {
-    private static final ResourceLocation LAYER = ResourceLocation.fromNamespaceAndPath(
+    private static final ResourceLocation LAYER = new ResourceLocation(
             EnigmaticArcana.MOD_ID,
             "textures/armor/apothic_crusader_armor_glowmask.png");
 
@@ -33,7 +33,7 @@ public class ApothicCrusaderArmorLayer extends GeoRenderLayer<ApothicCrusaderArm
                         partialTick,
                         packedLight,
                         OverlayTexture.NO_OVERLAY,
-                        0xFFFFFFFF
+                        1.0F, 1.0F, 1.0F, 1.0F
                 );
     }
 }

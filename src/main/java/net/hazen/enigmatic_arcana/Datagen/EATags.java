@@ -16,20 +16,20 @@ public class EATags {
 
     // Dark Arts School Focus
     public static final TagKey<Item> DARK_ARTS_FOCUS = ItemTags
-            .create(ResourceLocation.parse(ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "focus/dark_arts_focus").toString()));
+            .create(ResourceLocation.parse(new ResourceLocation(EnigmaticArcana.MOD_ID, "focus/dark_arts_focus").toString()));
 
     public static final TagKey<Item> IDLE_ARMOR = ItemTags
-            .create(ResourceLocation.parse(ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "armor/idle_armor").toString()));
+            .create(ResourceLocation.parse(new ResourceLocation(EnigmaticArcana.MOD_ID, "armor/idle_armor").toString()));
 
 
 
     public static class Blocks {
 
         public static final TagKey<Block> NEEDS_AGROCONIC_TOOL = BlockTags
-                .create(ResourceLocation.parse(ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "needs_agroconic_tool").toString()));
+                .create(ResourceLocation.parse(new ResourceLocation(EnigmaticArcana.MOD_ID, "needs_agroconic_tool").toString()));
 
         public static final TagKey<Block> INCORRECT_FOR_AGROCONIC_TOOl = BlockTags
-                .create(ResourceLocation.parse(ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "incorrect_for_agroconic_tool").toString()));
+                .create(ResourceLocation.parse(new ResourceLocation(EnigmaticArcana.MOD_ID, "incorrect_for_agroconic_tool").toString()));
 
     }
 

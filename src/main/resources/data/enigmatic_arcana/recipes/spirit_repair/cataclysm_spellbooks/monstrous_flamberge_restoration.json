@@ -1,0 +1,29 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 1,
+    "item": "minecraft:netherite_ingot"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 12
+    },
+    {
+      "type": "earthen",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "cataclysm_spellbooks:monstrous_flamberge"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cataclysm_spellbooks"
+    }
+  ]
+}

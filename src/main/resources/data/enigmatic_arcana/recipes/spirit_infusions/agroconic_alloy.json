@@ -1,0 +1,40 @@
+{
+  "type": "malum:spirit_infusion",
+  "input": {
+    "count": 1,
+    "item": "malum:soul_stained_steel_ingot"
+  },
+  "spirits": [
+    {
+      "type": "eldritch",
+      "count": 24
+    },
+    {
+      "type": "arcane",
+      "count": 32
+    },
+    {
+      "type": "wicked",
+      "count": 32
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "enigmatic_arcana:agroconic_alloy"
+  },
+  "extra_items": [
+    {
+      "count": 4,
+      "item": "malum:refined_soulstone"
+    },
+    {
+      "count": 2,
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "count": 2,
+      "item": "irons_spellbooks:mithril_scrap"
+    }
+  ],
+  "useNbtFromInput": true
+}

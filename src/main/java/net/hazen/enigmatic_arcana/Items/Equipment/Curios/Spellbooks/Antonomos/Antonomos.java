@@ -1,18 +1,19 @@
 package net.hazen.enigmatic_arcana.Items.Equipment.Curios.Spellbooks.Antonomos;
 
-import com.sammy.malum.registry.common.MalumAttributes;
+
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.item.SpellBook;
-import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
+import net.hazen.enigmatic_arcana.Items.Utils.AttributeContainer;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.GeoRenderProvider;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -28,13 +29,18 @@ public class Antonomos extends SpellBook implements GeoItem {
                         .rarity(EARarities.AGROCONIC_RARITY.getValue())
                 );
 
-        this.withSpellbookAttributes(new AttributeContainer[]{
-                new AttributeContainer(MalumAttributes.ARCANE_RESONANCE, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                new AttributeContainer(MalumAttributes.SOUL_WARD_INTEGRITY, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                new AttributeContainer(AttributeRegistry.SPELL_RESIST, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)
-        });
+
+    }
+
+    @Override
+    public com.google.common.collect.Multimap<net.minecraft.world.entity.ai.attributes.Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, java.util.UUID id, ItemStack stack) {
+        var attributes = com.google.common.collect.ImmutableMultimap.<net.minecraft.world.entity.ai.attributes.Attribute, AttributeModifier>builder();
+        attributes.put(com.sammy.malum.registry.common.AttributeRegistry.ARCANE_RESONANCE.get(), new AttributeModifier(id, "Antonomos resonance", 0.25, AttributeModifier.Operation.MULTIPLY_BASE));
+        attributes.put(com.sammy.malum.registry.common.AttributeRegistry.SOUL_WARD_INTEGRITY.get(), new AttributeModifier(id, "Antonomos integrity", 0.2, AttributeModifier.Operation.MULTIPLY_BASE));
+        attributes.put(AttributeRegistry.SPELL_POWER.get(), new AttributeModifier(id, "Antonomos power", 0.15, AttributeModifier.Operation.MULTIPLY_BASE));
+        attributes.put(AttributeRegistry.SPELL_RESIST.get(), new AttributeModifier(id, "Antonomos resistance", 0.1, AttributeModifier.Operation.MULTIPLY_BASE));
+        attributes.put(AttributeRegistry.MAX_MANA.get(), new AttributeModifier(id, "Antonomos mana", 300, AttributeModifier.Operation.ADDITION));
+        return attributes.build();
     }
 
     @Override
@@ -65,12 +71,12 @@ public class Antonomos extends SpellBook implements GeoItem {
     }
 
     @Override
-    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
-        consumer.accept(new GeoRenderProvider() {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
             private AntonomosRenderer renderer;
 
             @Override
-            public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (this.renderer == null)
                     this.renderer = new AntonomosRenderer();
 

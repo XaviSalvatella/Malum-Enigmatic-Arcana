@@ -1,0 +1,29 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "monsterspellbooks:orichalcum_ingot"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:orichalcum_greatsword",
+    "monsterspellbooks:orichalcum_warhammer",
+    "monsterspellbooks:orichalcum_axe",
+    "monsterspellbooks:orichalcum_greataxe",
+    "monsterspellbooks:orichalcum_dagger"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

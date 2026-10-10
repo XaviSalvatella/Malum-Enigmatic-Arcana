@@ -1,28 +1,8 @@
 package net.hazen.enigmatic_arcana.Utils;
-
-import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.Rarity;
-import net.neoforged.fml.common.asm.enumextension.EnumProxy;
-
-import java.util.function.UnaryOperator;
-
 public class EARarities {
-
-    public static final EnumProxy<Rarity> AGROCONIC_RARITY = new EnumProxy<>(Rarity.class,
-            -1,
-            "enigmatic_arcana:agroconic",
-            (UnaryOperator<Style>) ((style) -> style.withColor(0x841236))
-            );
-
-    public static final EnumProxy<Rarity> UMBRAL_RARITY = new EnumProxy<>(Rarity.class,
-            -1,
-            "enigmatic_arcana:umbral",
-            (UnaryOperator<Style>) ((style) -> style.withColor(0xe77e0b))
-    );
-
-    public static final EnumProxy<Rarity> SOUL_STAINED_RARITY = new EnumProxy<>(Rarity.class,
-            -1,
-            "enigmatic_arcana:soul_stained",
-            (UnaryOperator<Style>) ((style) -> style.withColor(0xee8fff))
-    );
+    public record RarityValue(Rarity value) { public Rarity getValue() { return value; } }
+    public static final RarityValue AGROCONIC_RARITY = new RarityValue(Rarity.create("ENIGMATIC_ARCANA_AGROCONIC", style -> style.withColor(0x841236)));
+    public static final RarityValue UMBRAL_RARITY = new RarityValue(Rarity.create("ENIGMATIC_ARCANA_UMBRAL", style -> style.withColor(0xe77e0b)));
+    public static final RarityValue SOUL_STAINED_RARITY = new RarityValue(Rarity.create("ENIGMATIC_ARCANA_SOUL_STAINED", style -> style.withColor(0xee8fff)));
 }

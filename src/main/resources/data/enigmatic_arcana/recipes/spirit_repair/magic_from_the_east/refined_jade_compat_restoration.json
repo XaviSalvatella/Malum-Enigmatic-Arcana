@@ -1,0 +1,33 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 8,
+    "item": "iss_magicfromtheeast:refined_jade_ingot"
+  },
+  "spirits": [
+    {
+      "type": "sacred",
+      "count": 8
+    },
+    {
+      "type": "earthen",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "iss_magicfromtheeast:jade_guandao",
+    "iss_magicfromtheeast:jade_pagoda_helmet",
+    "iss_magicfromtheeast:jade_pagoda_chestplate",
+    "iss_magicfromtheeast:jade_pagoda_leggings",
+    "iss_magicfromtheeast:jade_pagoda_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "iss_magicfromtheeast"
+    }
+  ]
+}

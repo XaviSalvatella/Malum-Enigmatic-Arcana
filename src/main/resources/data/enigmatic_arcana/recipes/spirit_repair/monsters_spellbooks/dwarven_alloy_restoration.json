@@ -1,0 +1,27 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "monsterspellbooks:dwarven_alloy_ingot"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:dwarven_warhammer",
+    "monsterspellbooks:dwarven_axe",
+    "monsterspellbooks:dwarven_greataxe"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

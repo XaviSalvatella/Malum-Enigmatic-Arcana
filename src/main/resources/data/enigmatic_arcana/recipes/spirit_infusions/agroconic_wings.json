@@ -1,0 +1,48 @@
+{
+  "type": "malum:spirit_infusion",
+  "input": {
+    "count": 1,
+    "item": "minecraft:elytra"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 48
+    },
+    {
+      "type": "aerial",
+      "count": 32
+    },
+    {
+      "type": "sacred",
+      "count": 48
+    },
+    {
+      "type": "eldritch",
+      "count": 32
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "enigmatic_arcana:agroconic_wings"
+  },
+  "extra_items": [
+    {
+      "count": 4,
+      "item": "enigmatic_arcana:umbral_weave"
+    },
+    {
+      "count": 4,
+      "item": "enigmatic_arcana:agroconic_alloy"
+    },
+    {
+      "count": 8,
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "count": 4,
+      "item": "irons_spellbooks:bloody_vellum"
+    }
+  ],
+  "useNbtFromInput": true
+}

@@ -1,0 +1,33 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 1,
+    "item": "crystal_chronicles:volcanite_shard"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "crystal_chronicles:chakram",
+    "crystal_chronicles:pyromancer_helmet",
+    "crystal_chronicles:pyromancer_chestplate",
+    "crystal_chronicles:pyromancer_leggings",
+    "crystal_chronicles:pyromancer_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "crystal_chronicles"
+    }
+  ]
+}

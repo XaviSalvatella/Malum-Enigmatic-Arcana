@@ -1,0 +1,36 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 3,
+    "item": "irons_spellbooks:magic_cloth"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "iss_magicfromtheeast:taoist_helmet",
+    "iss_magicfromtheeast:taoist_chestplate",
+    "iss_magicfromtheeast:taoist_leggings",
+    "iss_magicfromtheeast:taoist_boots",
+    "iss_magicfromtheeast:onmyoji_helmet",
+    "iss_magicfromtheeast:onmyoji_chestplate",
+    "iss_magicfromtheeast:onmyoji_leggings",
+    "iss_magicfromtheeast:onmyoji_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "iss_magicfromtheeast"
+    }
+  ]
+}

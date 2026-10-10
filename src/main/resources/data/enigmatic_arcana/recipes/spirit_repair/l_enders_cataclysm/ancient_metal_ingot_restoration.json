@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 2,
+    "item": "cataclysm:ancient_metal_ingot"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 8
+    },
+    {
+      "type": "sacred",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "cataclysm:ancient_spear",
+    "cataclysm:bone_reptile_helmet",
+    "cataclysm:bone_reptile_chestplate"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cataclysm"
+    }
+  ]
+}

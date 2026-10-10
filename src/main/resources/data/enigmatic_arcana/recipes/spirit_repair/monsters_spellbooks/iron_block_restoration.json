@@ -1,0 +1,25 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "monsterspellbooks:iron_block"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:paladin_hammer"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

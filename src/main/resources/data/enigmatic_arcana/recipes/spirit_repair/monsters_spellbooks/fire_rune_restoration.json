@@ -1,0 +1,25 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "irons_spellbooks:fire_rune"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:wildfire_crown"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

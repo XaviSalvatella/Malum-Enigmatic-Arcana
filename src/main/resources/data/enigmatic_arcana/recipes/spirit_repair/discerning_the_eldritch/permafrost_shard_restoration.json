@@ -1,0 +1,34 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.75,
+  "repairMaterial": {
+    "count": 4,
+    "item": "irons_spellbooks:permafrost_shard"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 16
+    },
+    {
+      "type": "aerial",
+      "count": 16
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "discerning_the_eldritch:ice_spear",
+    "discerning_the_eldritch:snowgrave"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "discerning_the_eldritch"
+    }
+  ]
+}
