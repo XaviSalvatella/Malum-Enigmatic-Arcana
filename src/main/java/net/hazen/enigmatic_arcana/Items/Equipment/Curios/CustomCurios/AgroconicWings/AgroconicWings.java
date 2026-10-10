@@ -24,7 +24,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.function.Consumer;
 
 public class AgroconicWings extends CurioBaseItem implements GeoItem {
-    private static final Attribute FALL_FLY_ATTRIBUTE = CaelusApi.getInstance().getFallFlyingAttribute();
+    private static final Attribute FALL_FLY_ATTRIBUTE = CaelusApi.getInstance().getFlightAttribute();
     private static final ResourceLocation ANGEL_WINGS = new ResourceLocation(EnigmaticArcana.MOD_ID, "angel_wings_flight");
 
 
