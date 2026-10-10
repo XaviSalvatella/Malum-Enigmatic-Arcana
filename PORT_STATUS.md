@@ -55,3 +55,9 @@ por sí solo el código pendiente y no garantiza que el port funcione.
 
 El parche no incluye texturas, modelos ni animaciones. Conservar la licencia del
 proyecto; su archivo TEMPLATE_LICENSE.txt contiene restricciones sobre sus assets.
+
+## Seguimiento en GitHub
+Copia de trabajo: https://github.com/XaviSalvatella/Malum-Enigmatic-Arcana
+Borrador: https://github.com/XaviSalvatella/Malum-Enigmatic-Arcana/pull/1
+La comprobación automática ejecuta compileJava con Java 17; no publica un JAR.
+Se envía esta actualización para comprobar la ejecución tras acceder a Actions.
