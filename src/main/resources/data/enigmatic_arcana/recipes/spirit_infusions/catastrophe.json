@@ -33,7 +33,7 @@
     },
     {
       "count": 4,
-      "item": "malum:refined_soulstone"
+      "item": "malum:processed_soulstone"
     }
   ],
   "useNbtFromInput": true

@@ -20,7 +20,7 @@ public class ApothicCrusaderArmorItem extends EAImbuableArmorItem implements IDi
                         .stacksTo(1)
                         .rarity(EARarities.AGROCONIC_RARITY.getValue())
                         .fireResistant()
-                        
+
                 ,
                 pureTierMalum(250, 0.15f, 0.5f, 4, 0.2F)
         );

@@ -16,6 +16,7 @@ Origen: Hazentouvel/Malum-Enigmatic-Arcana, commit a4264acc0161d0aa8f8b10bef6e2d
 ## Sustituciones de ingredientes (balance provisional)
 - soulwoven_silk → spirit_fabric, material textil disponible en Malum 1.6.7.
 - paracausal_flame → fused_consciousness, material avanzado disponible en Malum 1.6.7.
+- refined_soulstone → processed_soulstone, nombre del material en Malum 1.6.7.
 - wind_charge → phantom_membrane, ingrediente de vuelo disponible en Minecraft 1.20.1.
 Se mantienen las cantidades. Estas sustituciones necesitan revisión jugando.
 

@@ -9,7 +9,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 
-public class EAImbuableArmorItem extends EAArmorItem implements IPresetSpellContainer {
+public abstract class EAImbuableArmorItem extends EAArmorItem implements IPresetSpellContainer {
     public EAImbuableArmorItem(ArmorMaterial material, Type type, Properties properties, AttributeContainer... attributeContainers) {
         super(material, type, properties, attributeContainers);
     }

@@ -17,5 +17,22 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
-      - name: Compile unfinished port
-        run: bash gradlew compileJava --no-daemon --stacktrace
+      - name: Build development port
+        run: bash gradlew build --no-daemon --stacktrace
+      - name: Check dedicated server mod loading
+        run: timeout 180s bash gradlew runServer --no-daemon --stacktrace
+      - name: Upload diagnostic logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-port-diagnostics
+          path: |
+            run/logs/
+            run/crash-reports/
+          if-no-files-found: ignore
+      - name: Upload development build
+        uses: actions/upload-artifact@v4
+        with:
+          name: enigmatic-arcana-forge-1.20.1-dev
+          path: build/libs/*.jar
+

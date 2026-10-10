@@ -45,7 +45,7 @@ public class Catastrophe extends BowItem implements GeoItem {
                 .fireResistant()
                 .rarity(EARarities.SOUL_STAINED_RARITY.getValue())
                 .durability(1561)
-                
+
         );
         GeoItem.registerSyncedAnimatable(this);
     }

@@ -2,7 +2,7 @@ package net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.Agroconic
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.illusivesoulworks.caelus.api.CaelusApi;
+import top.theillusivec4.caelus.api.CaelusApi;
 import net.hazen.enigmatic_arcana.EnigmaticArcana;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
