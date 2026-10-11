@@ -25,17 +25,20 @@ Se mantienen las cantidades. Estas sustituciones necesitan revisión jugando.
 - El commit 6438bf9157fe23d640e84b64221836c8d82aac50 completó gradlew build y generó un JAR de desarrollo.
 - Ejecución: https://github.com/XaviSalvatella/Malum-Enigmatic-Arcana/actions/runs/38087937687
 - La prueba runServer NO acredita un arranque correcto: registró una dependencia Malum incompatible y terminó en el aviso EULA. El código de salida cero de Gradle ocultó el problema.
-- Error exacto: mods.toml exige Malum [1.6.7,1.7), pero el archivo instalado declara 1.20.1-1.6.7.
+- Error observado: mods.toml exigía Malum [1.6.7,1.7), pero el archivo instalado declara 1.20.1-1.6.7.
+- Corregido el requisito a [1.20.1-1.6.7,1.20.1-1.7). Cambio pendiente de ejecución por el usuario.
 - No hay una versión jugable validada. No usar el estado verde de esa ejecución como prueba de funcionamiento.
 
 ## Trabajo por tandas
 Los flujos del port pasan a ejecución manual: se eliminan push y pull_request en la rama del port, y el disparador push del ayudante forge-port.yml de main. No lanzar ambos flujos para la misma tanda.
-Esta tanda solo revisó registros y configuración; no inició compilaciones ni corrigió el código del mod.
+La tanda de preparación corrigió el requisito de Malum. Los flujos ahora solo ejecutan build y ofrecen el JAR como artefacto: se retiró la prueba runServer que daba un falso positivo antes de cargar el juego. Un resultado verde acredita únicamente compilación y empaquetado, NO funcionamiento.
+No se lanzó ninguna compilación en esta tanda.
 
-## Siguiente tanda acotada
-1. Corregir el rango de Malum en src/main/resources/META-INF/mods.toml según la versión real 1.20.1-1.6.7.
-2. Evitar que la comprobación de servidor se marque como validada cuando termina antes de cargar el juego; revisar registros además del código de salida.
-3. Ejecutar como máximo una comprobación y guardar su resultado antes de continuar.
+## Siguiente paso del usuario
+1. Abrir https://github.com/XaviSalvatella/Malum-Enigmatic-Arcana/actions/workflows/forge-port.yml
+2. Run workflow, dejando Branch: main. El flujo descarga explícitamente port/forge-1.20.1.
+3. Lanzar una sola ejecución y compartir su enlace cuando termine.
+4. Revisar ese resultado antes de otra tanda. El arranque real de servidor y las pruebas de cliente siguen pendientes.
 
 ## Pendientes posteriores
 - Convertir los loaders de modelos de neoforge: a sus equivalentes Forge, incluyendo neoforge_data.
