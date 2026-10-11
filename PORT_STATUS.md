@@ -41,7 +41,7 @@ No se lanzó ninguna compilación en esta tanda.
 4. Revisar ese resultado antes de otra tanda. El arranque real de servidor y las pruebas de cliente siguen pendientes.
 
 ## Pendientes posteriores
-- Convertir los loaders de modelos de neoforge: a sus equivalentes Forge, incluyendo neoforge_data.
+- Modelos: adaptación de formatos completada; falta comprobar su aspecto y animaciones dentro del cliente.
 - Revisar recetas opcionales, etiquetas Forge, atributo de crítico y tooltip de Nihility.
 - Antes de reanudar, comprobar si quedan cambios locales sin subir de la sesión anterior; no suponer que están en GitHub ni sobrescribirlos.
 - Verificar recetas en mundo, cliente, modelos y animaciones, vuelo, magia, daño y multijugador.
@@ -49,3 +49,13 @@ No se lanzó ninguna compilación en esta tanda.
 
 No fusionar con main ni publicar como versión estable antes de esas pruebas.
 Conservar la licencia del origen y sus restricciones sobre los assets.
+
+## Tanda de modelos — 11 de octubre de 2026
+- El usuario confirmó la compilación manual #2 correcta (run 38127549878) y descargó el artefacto anterior.
+- Adaptados 15 modelos JSON: 11 loaders forge:item_layers y 4 forge:separate_transforms.
+- Los 11 bloques neoforge_data pasan a forge_data, conservando iluminación, color y ambient_occlusion.
+- Se mantienen texturas, geometrías, animaciones y transformaciones.
+- Validación estática: JSON válidos, referencias locales de texturas y modelos existentes, sin referencias NeoForge en los archivos adaptados. Formatos contrastados con ItemLayerModel y SeparateTransformsModel de MinecraftForge, rama 1.20.1.
+- No se ha compilado ni ejecutado Minecraft en esta tanda. El JAR descargado anteriormente no contiene esta corrección.
+- Los cambios locales anteriores de recetas, tags y Nihility se conservan aparte; no se incluyeron en esta tanda.
+- Siguiente paso: el usuario lanza una vez forge-port.yml desde main y comparte el resultado. Después preparar prueba en una instancia separada con las dependencias correctas.
