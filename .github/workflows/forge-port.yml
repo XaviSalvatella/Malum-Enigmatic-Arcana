@@ -3,8 +3,12 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: forge-port-build
+  cancel-in-progress: false
 jobs:
   compile:
+    name: Generar JAR de desarrollo
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -16,4 +20,14 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
-      - run: bash gradlew compileJava --no-daemon --stacktrace
+      - name: Compilar y empaquetar
+        run: bash gradlew build --no-daemon --stacktrace
+      - name: Descargar JAR de desarrollo
+        uses: actions/upload-artifact@v4
+        with:
+          name: enigmatic-arcana-forge-1.20.1-dev
+          path: build/libs/*.jar
+          if-no-files-found: error
+      - name: Alcance de esta comprobacion
+        run: |
+          echo 'JAR de desarrollo generado. NO se ha probado el arranque del servidor, el cliente ni una partida.' >> "$GITHUB_STEP_SUMMARY"
