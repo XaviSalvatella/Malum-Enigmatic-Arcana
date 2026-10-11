@@ -1,0 +1,33 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 1,
+    "item": "minecraft:totem_of_undying"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "crystal_chronicles:evocation_twinblade",
+    "crystal_chronicles:evoker_helmet",
+    "crystal_chronicles:evoker_chestplate",
+    "crystal_chronicles:evoker_leggings",
+    "crystal_chronicles:evoker_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "crystal_chronicles"
+    }
+  ]
+}

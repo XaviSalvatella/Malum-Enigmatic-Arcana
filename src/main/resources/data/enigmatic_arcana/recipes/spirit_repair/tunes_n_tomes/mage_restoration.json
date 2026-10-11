@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 3,
+    "item": "irons_spellbooks:magic_cloth"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "tunes_n_tomes:bard_helmet",
+    "tunes_n_tomes:bard_chestplate",
+    "tunes_n_tomes:bard_leggings",
+    "tunes_n_tomes:bard_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tunes_n_tomes"
+    }
+  ]
+}

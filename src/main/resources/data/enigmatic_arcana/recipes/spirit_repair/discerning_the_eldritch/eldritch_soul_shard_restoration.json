@@ -1,0 +1,33 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.75,
+  "repairMaterial": {
+    "count": 1,
+    "item": "discerning_the_eldritch:eldritch_soul_shard"
+  },
+  "spirits": [
+    {
+      "type": "eldritch",
+      "count": 16
+    },
+    {
+      "type": "wicked",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "discerning_the_eldritch:ymir"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "discerning_the_eldritch"
+    }
+  ]
+}

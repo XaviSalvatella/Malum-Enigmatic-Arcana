@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "monsterspellbooks:void_obsidian_ingot"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:starscourge_helmet",
+    "monsterspellbooks:starscourge_chestplate",
+    "monsterspellbooks:starscourge_leggings",
+    "monsterspellbooks:starscourge_boots",
+    "monsterspellbooks:disruption_naginata",
+    "monsterspellbooks:endersent_crusher",
+    "monsterspellbooks:starscourge_sword"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

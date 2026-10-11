@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 3,
+    "item": "irons_spellbooks:magic_cloth"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "asterism_arcanum:astral_crown",
+    "asterism_arcanum:astral_chestplate",
+    "asterism_arcanum:astral_leggings",
+    "asterism_arcanum:astral_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "asterism_arcanum"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 8,
+    "item": "monsterspellbooks:white_gold_ingot"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:white_gold_shovel",
+    "monsterspellbooks:white_gold_pickaxe",
+    "monsterspellbooks:white_gold_axe",
+    "monsterspellbooks:white_gold_hoe"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

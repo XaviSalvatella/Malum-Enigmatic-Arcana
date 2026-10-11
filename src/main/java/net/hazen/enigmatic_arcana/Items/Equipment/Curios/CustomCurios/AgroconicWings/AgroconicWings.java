@@ -2,10 +2,15 @@ package net.hazen.enigmatic_arcana.Items.Equipment.Curios.CustomCurios.Agroconic
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.illusivesoulworks.caelus.api.CaelusApi;
+import top.theillusivec4.caelus.api.CaelusApi;
 import net.hazen.enigmatic_arcana.EnigmaticArcana;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
-import net.hazen.hazentouvelib.Items.Curios.Wings.WingCurioItem;
+import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -13,15 +18,17 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.function.Consumer;
 
-public class AgroconicWings extends WingCurioItem {
-    private static final Holder<Attribute> FALL_FLY_ATTRIBUTE = CaelusApi.getInstance().getFallFlyingAttribute();
-    private static final ResourceLocation ANGEL_WINGS = ResourceLocation.fromNamespaceAndPath(EnigmaticArcana.MOD_ID, "angel_wings_flight");
+public class AgroconicWings extends CurioBaseItem implements GeoItem {
+    private static final Attribute FALL_FLY_ATTRIBUTE = CaelusApi.getInstance().getFlightAttribute();
+    private static final ResourceLocation ANGEL_WINGS = new ResourceLocation(EnigmaticArcana.MOD_ID, "angel_wings_flight");
 
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public AgroconicWings() {
         super(new Item.Properties()
@@ -29,15 +36,16 @@ public class AgroconicWings extends WingCurioItem {
                 .fireResistant()
                 .rarity(EARarities.AGROCONIC_RARITY.getValue())
         );
+        GeoItem.registerSyncedAnimatable(this);
     }
 
     @Override
-    public void createGeoRenderer(Consumer<GeoRenderProvider> consumer) {
-        consumer.accept(new GeoRenderProvider() {
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
             private AgroconicWingsRenderer renderer;
 
             @Override
-            public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (this.renderer == null)
                     this.renderer = new AgroconicWingsRenderer();
 
@@ -47,11 +55,31 @@ public class AgroconicWings extends WingCurioItem {
     }
 
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> attributes = LinkedHashMultimap.create();
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, java.util.UUID id, ItemStack stack) {
+        Multimap<Attribute, AttributeModifier> attributes = LinkedHashMultimap.create();
 
-        attributes.put(FALL_FLY_ATTRIBUTE, new AttributeModifier(ANGEL_WINGS, 1.0D, AttributeModifier.Operation.ADD_VALUE));
+        attributes.put(FALL_FLY_ATTRIBUTE, new AttributeModifier(id, "Agroconic wings flight", 1.0D, AttributeModifier.Operation.ADDITION));
 
         return attributes;
+    }
+
+    @Override public AnimatableInstanceCache getAnimatableInstanceCache() { return cache; }
+    @Override public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, "wing", 5, state -> {
+            state.setAnimation(RawAnimation.begin().thenLoop("idle_1"));
+            return PlayState.CONTINUE;
+        }).triggerableAnim("flight", RawAnimation.begin().thenLoop("flight"))
+          .triggerableAnim("idle", RawAnimation.begin().thenLoop("idle_1")));
+    }
+    @Override public boolean canEquipFromUse(SlotContext slot, ItemStack stack) { return true; }
+    @Override public void curioTick(SlotContext slot, ItemStack stack) {
+        if (slot.entity().level() instanceof net.minecraft.server.level.ServerLevel level) {
+            boolean flying = slot.entity().isFallFlying();
+            var tag = stack.getOrCreateTag();
+            if (!tag.contains("eaFlight") || tag.getBoolean("eaFlight") != flying) {
+                tag.putBoolean("eaFlight", flying);
+                triggerAnim(slot.entity(), GeoItem.getOrAssignId(stack, level), "wing", flying ? "flight" : "idle");
+            }
+        }
     }
 }

@@ -1,0 +1,34 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 1,
+    "item": "cataclysm:black_steel_ingot"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 8
+    },
+    {
+      "type": "wicked",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "cataclysm:black_steel_targe",
+    "cataclysm:black_steel_sword",
+    "cataclysm:black_steel_hoe",
+    "cataclysm:black_steel_shovel",
+    "cataclysm:black_steel_pickaxe",
+    "cataclysm:black_steel_axe"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cataclysm"
+    }
+  ]
+}

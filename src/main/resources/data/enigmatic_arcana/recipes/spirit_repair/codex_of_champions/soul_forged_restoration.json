@@ -1,0 +1,34 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.75,
+  "repairMaterial": {
+    "count": 1,
+    "item": "codex_of_champions:soul_forged_ingot"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "codex_of_champions:soulfire_greatsword",
+    "codex_of_champions:deathfire_greatsword",
+    "codex_of_champions:blood_soul_mask",
+    "codex_of_champions:blood_soul_robes",
+    "codex_of_champions:blood_soul_leggings",
+    "codex_of_champions:blood_soul_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "codex_of_champions"
+    }
+  ]
+}

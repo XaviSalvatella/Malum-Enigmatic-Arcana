@@ -1,0 +1,29 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 8,
+    "item": "minecraft:breeze_rod"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "aero_additions:wind_sword"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aero_additions"
+    }
+  ]
+}

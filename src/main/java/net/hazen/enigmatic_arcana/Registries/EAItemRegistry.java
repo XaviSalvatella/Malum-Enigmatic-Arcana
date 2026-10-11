@@ -10,29 +10,29 @@ import net.hazen.enigmatic_arcana.Items.Equipment.Weapons.Nihility;
 import net.hazen.enigmatic_arcana.Utils.EARarities;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.Collection;
 
 public class EAItemRegistry {
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(EnigmaticArcana.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, EnigmaticArcana.MOD_ID);
 
 
     /*
     *** Materials
      */
 
-    public static final DeferredItem<Item> AGROCONIC_ALLOY = ITEMS.register("agroconic_alloy",
+    public static final RegistryObject<Item> AGROCONIC_ALLOY = ITEMS.register("agroconic_alloy",
             () -> new Item(new Item
                     .Properties()
                     .rarity(EARarities.AGROCONIC_RARITY.getValue())
 
             ));
 
-    public static final DeferredItem<Item> UMBRAL_WEAVE = ITEMS.register("umbral_weave",
+    public static final RegistryObject<Item> UMBRAL_WEAVE = ITEMS.register("umbral_weave",
             () -> new Item(new Item
                     .Properties()
                     .rarity(EARarities.UMBRAL_RARITY.getValue())
@@ -45,10 +45,10 @@ public class EAItemRegistry {
      */
 
     // Agroconic Bulwark
-    public static final DeferredHolder<Item, Item> AGROCONIC_BULWARK = ITEMS.register("agroconic_bulwark", AgroconicBulwark::new);
+    public static final RegistryObject<Item> AGROCONIC_BULWARK = ITEMS.register("agroconic_bulwark", AgroconicBulwark::new);
 
     // Agroconic Wings
-    public static final DeferredItem<AgroconicWings> AGROCONIC_WINGS = ITEMS.register("agroconic_wings", AgroconicWings::new);
+    public static final RegistryObject<AgroconicWings> AGROCONIC_WINGS = ITEMS.register("agroconic_wings", AgroconicWings::new);
 
 
     /*
@@ -56,7 +56,7 @@ public class EAItemRegistry {
      */
 
     // Antonomos
-    public static final DeferredItem <Antonomos> ANTONOMOS = ITEMS.register("antonomos", Antonomos::new);
+    public static final RegistryObject<Antonomos> ANTONOMOS = ITEMS.register("antonomos", Antonomos::new);
 
 
 
@@ -67,10 +67,10 @@ public class EAItemRegistry {
 
 
     //Nihility
-    public static final DeferredHolder<Item, Item> NIHILITY = ITEMS.register
+    public static final RegistryObject<Item> NIHILITY = ITEMS.register
             ("nihility", Nihility::new);
 
-    public static final DeferredItem<Catastrophe> CATASTROPHE =
+    public static final RegistryObject<Catastrophe> CATASTROPHE =
             ITEMS.register("catastrophe", () -> new Catastrophe(new Item.Properties()));
 
 
@@ -78,26 +78,26 @@ public class EAItemRegistry {
     *** Armor
      */
 
-    public static final DeferredHolder<Item, Item> APOTHIC_CRUSADER_HELMET = ITEMS.register("apothic_crusader_helmet",
+    public static final RegistryObject<Item> APOTHIC_CRUSADER_HELMET = ITEMS.register("apothic_crusader_helmet",
             () -> new ApothicCrusaderArmorItem(ArmorItem.Type.HELMET, new Item.Properties()
-                    .durability(ArmorItem.Type.HELMET.getDurability(64))
+                    .durability(832)
             ));
-    public static final DeferredHolder<Item, Item> APOTHIC_CRUSADER_CHESTPLATE = ITEMS.register("apothic_crusader_chestplate",
+    public static final RegistryObject<Item> APOTHIC_CRUSADER_CHESTPLATE = ITEMS.register("apothic_crusader_chestplate",
             () -> new ApothicCrusaderArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties()
-                    .durability(ArmorItem.Type.CHESTPLATE.getDurability(64))
+                    .durability(1024)
             ));
-    public static final DeferredHolder<Item, Item> APOTHIC_CRUSADER_LEGGINGS = ITEMS.register("apothic_crusader_leggings",
+    public static final RegistryObject<Item> APOTHIC_CRUSADER_LEGGINGS = ITEMS.register("apothic_crusader_leggings",
             () -> new ApothicCrusaderArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties()
-                    .durability(ArmorItem.Type.LEGGINGS.getDurability(64))
+                    .durability(960)
             ));
-    public static final DeferredHolder<Item, Item> APOTHIC_CRUSADER_BOOTS = ITEMS.register("apothic_crusader_boots",
+    public static final RegistryObject<Item> APOTHIC_CRUSADER_BOOTS = ITEMS.register("apothic_crusader_boots",
             () -> new ApothicCrusaderArmorItem(ArmorItem.Type.BOOTS, new Item.Properties()
-                    .durability(ArmorItem.Type.BOOTS.getDurability(64))
+                    .durability(704)
             ));
 
 
 
-    public static Collection<DeferredHolder<Item, ? extends Item>> getEAItems()
+    public static Collection<RegistryObject<Item>> getEAItems()
     {
         return ITEMS.getEntries();
     }

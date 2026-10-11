@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 3,
+    "item": "irons_spellbooks:magic_cloth"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "magic_of_color:gilded_magicians_mask",
+    "magic_of_color:gilded_magicians_hat",
+    "magic_of_color:gilded_magicians_hood"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "magic_of_color"
+    }
+  ]
+}

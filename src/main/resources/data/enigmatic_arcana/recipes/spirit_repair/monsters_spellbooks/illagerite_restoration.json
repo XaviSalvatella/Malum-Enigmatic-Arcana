@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "monsterspellbooks:illagerite_ingot"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:illager_enchanter_helmet",
+    "monsterspellbooks:illager_enchanter_chestplate",
+    "monsterspellbooks:illager_enchanter_leggings",
+    "monsterspellbooks:illager_enchanter_boots",
+    "monsterspellbooks:illager_enchanter_helmet",
+    "monsterspellbooks:illager_enchanter_chestplate",
+    "monsterspellbooks:illager_enchanter_leggings",
+    "monsterspellbooks:illager_iceologer_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

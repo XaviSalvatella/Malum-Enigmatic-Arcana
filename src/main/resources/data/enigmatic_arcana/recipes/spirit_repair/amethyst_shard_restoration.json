@@ -1,0 +1,19 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.25,
+  "repairMaterial": {
+    "count": 1,
+    "item": "minecraft:amethyst_shard"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 16
+    }
+  ],
+  "inputs": [
+    "irons_spellbooks:amethyst_rapier"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": ""
+}

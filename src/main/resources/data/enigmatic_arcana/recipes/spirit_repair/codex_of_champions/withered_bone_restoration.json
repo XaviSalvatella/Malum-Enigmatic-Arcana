@@ -1,0 +1,29 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.75,
+  "repairMaterial": {
+    "count": 1,
+    "item": "codex_of_champions:wither_bone"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "codex_of_champions:brutis"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "codex_of_champions"
+    }
+  ]
+}

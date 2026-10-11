@@ -1,0 +1,29 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1,
+  "repairMaterial": {
+    "count": 2,
+    "item": "cataclysm:amethyst_crab_shell"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 12
+    },
+    {
+      "type": "sacred",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "cataclysm:bloom_stone_pauldrons"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cataclysm"
+    }
+  ]
+}

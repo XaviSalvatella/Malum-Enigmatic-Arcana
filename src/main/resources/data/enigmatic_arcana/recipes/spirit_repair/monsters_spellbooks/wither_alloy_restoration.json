@@ -1,0 +1,25 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "monsterspellbooks:wither_alloy_ingot"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 6
+    }
+  ],
+  "inputs": [
+    "monsterspellbooks:reaper_sickle"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "monsterspellbooks"
+    }
+  ]
+}

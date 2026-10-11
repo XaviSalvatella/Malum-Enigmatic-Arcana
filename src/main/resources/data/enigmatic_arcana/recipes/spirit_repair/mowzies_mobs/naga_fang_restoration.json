@@ -1,0 +1,25 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 3,
+    "item": "mowziesmobs:naga_fang"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "mowziesmobs:naga_fang_dagger"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mowziesmobs"
+    }
+  ]
+}

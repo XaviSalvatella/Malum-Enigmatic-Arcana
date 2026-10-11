@@ -1,0 +1,33 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.75,
+  "repairMaterial": {
+    "count": 1,
+    "item": "codex_of_champions:sculk_rib"
+  },
+  "spirits": [
+    {
+      "type": "eldritch",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "codex_of_champions:warden_hunter_helmet",
+    "codex_of_champions:warden_hunter_armor",
+    "codex_of_champions:warden_hunter_leggings",
+    "codex_of_champions:warden_hunter_boots",
+    "codex_of_champions:sculk_slicer"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "codex_of_champions"
+    }
+  ]
+}

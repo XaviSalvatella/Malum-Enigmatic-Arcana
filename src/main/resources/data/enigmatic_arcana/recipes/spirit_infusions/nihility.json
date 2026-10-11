@@ -1,0 +1,44 @@
+{
+  "type": "malum:spirit_infusion",
+  "input": {
+    "count": 1,
+    "item": "malum:soul_stained_steel_scythe"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 64
+    },
+    {
+      "type": "arcane",
+      "count": 32
+    },
+    {
+      "type": "eldritch",
+      "count": 32
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "enigmatic_arcana:nihility"
+  },
+  "extra_items": [
+    {
+      "count": 4,
+      "item": "enigmatic_arcana:agroconic_alloy"
+    },
+    {
+      "count": 2,
+      "item": "malum:hex_ash"
+    },
+    {
+      "count": 1,
+      "item": "irons_spellbooks:weapon_parts"
+    },
+    {
+      "count": 1,
+      "item": "irons_spellbooks:decrepit_scythe"
+    }
+  ],
+  "useNbtFromInput": true
+}

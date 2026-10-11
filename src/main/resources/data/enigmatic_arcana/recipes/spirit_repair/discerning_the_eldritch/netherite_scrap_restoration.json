@@ -1,0 +1,26 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.25,
+  "repairMaterial": {
+    "count": 1,
+    "item": "minecraft:netherite_scrap"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 16
+    }
+  ],
+  "inputs": [
+    "discerning_the_eldritch:forsaken_flamberge",
+    "discerning_the_eldritch:soul_fire_scythe"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "discerning_the_eldritch"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "repairMaterial": {
+    "count": 2,
+    "item": "minecraft:echo_shard"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 6
+    },
+    {
+      "type": "eldritch",
+      "count": 12
+    }
+  ],
+  "inputs": [
+    "ozymandias_sundries:sculk_helmet",
+    "ozymandias_sundries:sculk_chestplate",
+    "ozymandias_sundries:sculk_leggings",
+    "ozymandias_sundries:sculk_boots"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ozymandias_sundries"
+    }
+  ]
+}

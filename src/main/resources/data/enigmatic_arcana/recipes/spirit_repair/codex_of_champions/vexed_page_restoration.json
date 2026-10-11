@@ -1,0 +1,33 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.75,
+  "repairMaterial": {
+    "count": 1,
+    "item": "codex_of_champions:vexed_page"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ],
+  "inputs": [
+    "codex_of_champions:monstrosity_helmet",
+    "codex_of_champions:monstrosity_chestplate",
+    "codex_of_champions:monstrosity_leggings",
+    "codex_of_champions:monstrosity_boots",
+    "codex_of_champions:crystal_claymore"
+  ],
+  "itemIdRegex": "",
+  "modIdRegex": "",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "codex_of_champions"
+    }
+  ]
+}
