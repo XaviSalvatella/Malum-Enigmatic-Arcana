@@ -17,7 +17,6 @@ public class ApothicCrusaderArmorItem extends EAImbuableArmorItem implements IDi
         super(EAArmorMaterials.AGROCONIC_MATERIAL,
                 type,
                 properties
-                        .stacksTo(1)
                         .rarity(EARarities.AGROCONIC_RARITY.getValue())
                         .fireResistant()
 
