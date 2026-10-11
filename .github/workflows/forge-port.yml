@@ -1,9 +1,6 @@
 name: Comprobar port Forge 1.20.1
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/forge-port.yml']
 permissions:
   contents: read
 jobs:
